@@ -9,12 +9,12 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("DISCUSSION_ID")]
-        [ForeignKey("SM_DISCUSSION")]
+        [ForeignKey("Discussion")]
         [Required]
-        public Guid? DiscussionId { get; set; }
+        public Guid DiscussionId { get; set; }
 
         [Column("PARENT_ID")]
         public Guid ParentId { get; set; }
@@ -26,12 +26,17 @@ namespace ScienceMap.WebServices.Data.Models
 
         [Column("CREATED_USER_ID")]
         [Required]
-        [ForeignKey("SM_USER")]
-        public Guid? CreatedUserId { get; set; }
+        [ForeignKey("User")]
+        public Guid CreatedUserId { get; set; }
 
         [Column("CREATED_DATE")]
         [Required]
         public DateTime? CreatedDate { get; set; }
+
+        #region Back Navigation
+        public virtual Discussion Discussion { get; set; }
+        public virtual User User { get; set; }
+        #endregion
 
     }
 }

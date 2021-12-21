@@ -9,16 +9,21 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("PARENT_SCS_ID")]
-        [ForeignKey("SM_SCS")]
+        [ForeignKey("ParentClassificationSubject")]
         [Required]
-        public Guid? ParentScsId { get; set; }
+        public Guid ParentScsId { get; set; }
 
         [Column("SCS_ID")]
-        [ForeignKey("SM_SCS")]
+        [ForeignKey("ClassificationSubject")]
         [Required]
-        public Guid? ScsId { get; set; }
+        public Guid ScsId { get; set; }
+
+        #region Back Navigation
+        public virtual ClassificationSubject ClassificationSubject { get; set; }
+        public virtual ClassificationSubject ParentClassificationSubject { get; set; }
+        #endregion
     }
 }

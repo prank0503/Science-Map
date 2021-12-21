@@ -9,12 +9,12 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("PUBLICATION_STATE_ID")]
-        [ForeignKey("SM_PUBLICATION_STATE")]
+        [ForeignKey("PublicationState")]
         [Required]
-        public Guid? PublicationStateId { get; set; }
+        public Guid PublicationStateId { get; set; }
 
         [Column("TITLE")]
         [MaxLength(80)]
@@ -33,5 +33,8 @@ namespace ScienceMap.WebServices.Data.Models
         [MaxLength(360)]
         public string AdditionalDetails { get; set; }
 
+        #region Back Navigation
+        public virtual PublicationState PublicationState { get; set; }
+        #endregion
     }
 }

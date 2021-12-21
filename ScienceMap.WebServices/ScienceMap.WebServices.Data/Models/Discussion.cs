@@ -9,11 +9,15 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("DISCUSSION_TYPE_ID")]
-        [ForeignKey("SM_DISCUSSION_TYPE")]
+        [ForeignKey("DiscussionType")]
         [Required]
-        public Guid? DiscussionTypeId { get; set; }
+        public Guid DiscussionTypeId { get; set; }
+
+        #region Back Navigation
+        public virtual DiscussionType DiscussionType { get; set; }
+        #endregion
     }
 }

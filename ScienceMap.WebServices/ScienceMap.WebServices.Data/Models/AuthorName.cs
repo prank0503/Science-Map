@@ -9,9 +9,8 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
-        // TODO- Unique using fluentAPI
         [Column("FIRST_NAME")]
         [MaxLength(30)]
         [Required]

@@ -9,17 +9,17 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("SCS_ID")]
-        [ForeignKey("SM_SCS")]
+        [ForeignKey("ClassificationSubject")]
         [Required]
-        public Guid? ScsId { get; set; }
+        public Guid ScsId { get; set; }
 
         [Column("SUGGESTED_USER_ID")]
-        [ForeignKey("SM_USER")]
+        [ForeignKey("User")]
         [Required]
-        public Guid? SuggestedUserId { get; set; }
+        public Guid SuggestedUserId { get; set; }
 
         [Column("APPLIED_USER_ORCHESTRATOR_ROLE")]
         [Required]
@@ -36,6 +36,11 @@ namespace ScienceMap.WebServices.Data.Models
         [Column("SUGGESTED_ORCHESTRATOR_PHONE")]
         [MaxLength(20)]
         public string SuggestedOrchestratorPhone { get; set; }
+
+        #region Back Navigation
+        public virtual ClassificationSubject ClassificationSubject { get; set; }
+        public virtual User User { get; set; }
+        #endregion
 
     }
 }

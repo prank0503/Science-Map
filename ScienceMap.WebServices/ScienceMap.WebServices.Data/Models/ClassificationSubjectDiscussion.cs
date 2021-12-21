@@ -9,17 +9,17 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("DISCUSSION_ID")]
-        [ForeignKey("SM_DISCUSSION")]
+        [ForeignKey("Discussion")]
         [Required]
-        public Guid? DiscussionId { get; set; }
+        public Guid DiscussionId { get; set; }
 
         [Column("SCS_ID")]
-        [ForeignKey("SM_SCS")]
+        [ForeignKey("ClassificationSubject")]
         [Required]
-        public Guid? ScsId { get; set; }
+        public Guid ScsId { get; set; }
 
         [Column("TITLE")]
         [MaxLength(50)]
@@ -32,8 +32,8 @@ namespace ScienceMap.WebServices.Data.Models
 
         [Column("INITIATED_USER_ID")]
         [Required]
-        [ForeignKey("SM_USER")]
-        public Guid? InitiatedUserId { get; set; }
+        [ForeignKey("User")]
+        public Guid InitiatedUserId { get; set; }
 
         [Column("INITIATED_DATE")]
         [Required]
@@ -42,6 +42,12 @@ namespace ScienceMap.WebServices.Data.Models
         [Column("KEYWORDS")]
         [MaxLength(30)]
         public string Keywords { get; set; }
+
+        #region Back Navigation
+        public virtual Discussion Discussion { get; set; }
+        public virtual ClassificationSubject ClassificationSubject { get; set; }
+        public virtual User User { get; set; }
+        #endregion
 
     }
 }

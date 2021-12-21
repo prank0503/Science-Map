@@ -9,18 +9,21 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("SUGGESTED_USER_ID")]
-        [ForeignKey("SM_USER")]
+        [ForeignKey("User")]
         [Required]
-        public Guid? SuggestedUserId { get; set; }
+        public Guid SuggestedUserId { get; set; }
 
         [Column("PUB_INFLUENCE_TYPE_ID")]
-        [ForeignKey("SM_PUB_INFLUENCE_TYPE")]
+        [ForeignKey("PubInfluenceType")]
         [Required]
-        public Guid? PubInfluenceTypeId { get; set; }
+        public Guid PubInfluenceTypeId { get; set; }
 
-        
+        #region Back Navigation
+        public virtual PubInfluenceType PubInfluenceType { get; set; }
+        public virtual User User { get; set; }
+        #endregion
     }
 }

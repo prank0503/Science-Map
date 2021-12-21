@@ -9,22 +9,22 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("PUB_ID_SOURCE")]
-        [ForeignKey("SM_PUBLICATION")]
+        [ForeignKey("PublicationSource")]
         [Required]
-        public Guid? PubIdSource { get; set; }
+        public Guid PubIdSource { get; set; }
 
         [Column("PUB_ID_TARGET")]
-        [ForeignKey("SM_PUBLICATION")]
+        [ForeignKey("PublicationTarget")]
         [Required]
-        public Guid? PubIdTarget { get; set; }
+        public Guid PubIdTarget { get; set; }
 
         [Column("PUB_INFLUENCE_TYPE_ID")]
-        [ForeignKey("SM_PUB_INFLUENCE_TYPE")]
+        [ForeignKey("PubInfluenceType")]
         [Required]
-        public Guid? PubInfluenceTypeId { get; set; }
+        public Guid PubInfluenceTypeId { get; set; }
 
         [Column("NOTE")]
         [MaxLength(250)]
@@ -32,8 +32,15 @@ namespace ScienceMap.WebServices.Data.Models
 
         [Column("CREATED_USER_ID")]
         [Required]
-        [ForeignKey("SM_USER")]
-        public Guid? CreatedUserId { get; set; }
+        [ForeignKey("User")]
+        public Guid CreatedUserId { get; set; }
+
+        #region Back Navigation
+        public virtual Publication PublicationSource { get; set; }
+        public virtual Publication PublicationTarget { get; set; }
+        public virtual PubInfluenceType PubInfluenceType { get; set; }
+        public virtual User User { get; set; }
+        #endregion
 
     }
 }

@@ -9,21 +9,28 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("SCS_ID")]
-        [ForeignKey("SM_SCS")]
+        [ForeignKey("ClassificationSubject")]
         [Required]
-        public Guid? ScsId { get; set; }
+        public Guid ScsId { get; set; }
 
         [Column("USER_ID")]
-        [ForeignKey("SM_USER")]
+        [ForeignKey("User")]
         [Required]
-        public Guid? UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Column("SCS_USER_ROLE_ID")]
-        [ForeignKey("SM_SCS_USER_ROLE")]
+        [ForeignKey("ClassificationSubjectUserRole")]
         [Required]
-        public Guid? ScsUserRoleId { get; set; }
+        public Guid ScsUserRoleId { get; set; }
+
+        #region Back Navigation
+        public virtual ClassificationSubject ClassificationSubject { get; set; }
+        public virtual User User { get; set; }
+        public virtual ClassificationSubjectUserRole ClassificationSubjectUserRole { get; set; }
+        #endregion
+
     }
 }

@@ -9,16 +9,16 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("NAME")]
         [Required]
         [MaxLength(30)]
-        public Guid? Name { get; set; }
+        public Guid Name { get; set; }
 
         [Column("DESCRIPTION")]
         [Required]
         [MaxLength(250)]
-        public Guid? Description { get; set; }
+        public Guid Description { get; set; }
     }
 }

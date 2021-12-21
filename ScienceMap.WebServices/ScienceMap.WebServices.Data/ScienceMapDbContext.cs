@@ -4,7 +4,7 @@ using System;
 
 namespace ScienceMap.WebServices.Data
 {
-    public class ScienceMapDbContext: DbContext
+    public class ScienceMapDbContext : DbContext
     {
         public ScienceMapDbContext(DbContextOptions options) : base(options)
         {
@@ -57,17 +57,38 @@ namespace ScienceMap.WebServices.Data
         DbSet<UserOrganisation> UserOrganisation { get; set; }
         DbSet<UserRole> UserRole { get; set; }
         DbSet<UserRoleType> UserRoleType { get; set; }
-
-        // TODO: Need to discuss with Harald about this table quite similar with ClassificationSubjectUser
-        // DbSet<UserScsMapping> UserScsMapping { get; set; }
-
         DbSet<UserState> UserState { get; set; }
+
+        // TODO: Rename the table column as its confusing and identical to other table
+        DbSet<UserScsMapping> UserScsMapping { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AuthorName>()
                 .HasAlternateKey(c => c.FirstName)
                 .HasName("AlternateKey_FirstName");
+
+
+            modelBuilder.Entity<ClassificationSubjectRelation>()
+                .HasOne(m => m.ClassificationSubject)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PubInfluence>()
+                .HasOne(m => m.PublicationTarget)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PubInfluenceRate>()
+                .HasOne(m => m.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserFavAuthor>()
+                .HasOne(m => m.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

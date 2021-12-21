@@ -21,7 +21,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.AuthorName", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -52,7 +52,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubject", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -78,19 +78,21 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("NAME");
 
-                    b.Property<Guid?>("StateId")
+                    b.Property<Guid>("StateId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("STATE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StateId");
+
                     b.ToTable("SM_SCS");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectDiscussion", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -100,7 +102,7 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(80)")
                         .HasColumnName("DESCRIPTION");
 
-                    b.Property<Guid?>("DiscussionId")
+                    b.Property<Guid>("DiscussionId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("DISCUSSION_ID");
@@ -110,7 +112,7 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("INITIATED_DATE");
 
-                    b.Property<Guid?>("InitiatedUserId")
+                    b.Property<Guid>("InitiatedUserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("INITIATED_USER_ID");
@@ -120,7 +122,7 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("KEYWORDS");
 
-                    b.Property<Guid?>("ScsId")
+                    b.Property<Guid>("ScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_ID");
@@ -133,44 +135,58 @@ namespace ScienceMap.WebServices.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiscussionId");
+
+                    b.HasIndex("InitiatedUserId");
+
+                    b.HasIndex("ScsId");
+
                     b.ToTable("SM_SCS_DISCUSSION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectPublication", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("OriginatorUserId")
+                    b.Property<Guid>("OriginatorUserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ORIGINATOR_USER_ID");
 
-                    b.Property<Guid?>("PublicationId")
+                    b.Property<Guid>("PublicationId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUBLICATION_ID");
 
-                    b.Property<Guid?>("ScsId")
+                    b.Property<Guid>("ScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_ID");
 
-                    b.Property<Guid?>("ScsPublicationStateId")
+                    b.Property<Guid>("ScsPublicationStateId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_PUBLICATION_STATE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OriginatorUserId");
+
+                    b.HasIndex("PublicationId");
+
+                    b.HasIndex("ScsId");
+
+                    b.HasIndex("ScsPublicationStateId");
+
                     b.ToTable("SM_SCS_PUBLICATION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectPublicationState", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -188,29 +204,33 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectRelation", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("ParentScsId")
+                    b.Property<Guid>("ParentScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PARENT_SCS_ID");
 
-                    b.Property<Guid?>("ScsId")
+                    b.Property<Guid>("ScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentScsId");
+
+                    b.HasIndex("ScsId");
+
                     b.ToTable("SM_SCS_RELATION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectState", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -228,7 +248,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectSuggestion", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -237,7 +257,7 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("APPLIED_USER_ORCHESTRATOR_ROLE");
 
-                    b.Property<Guid?>("ScsId")
+                    b.Property<Guid>("ScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_ID");
@@ -257,46 +277,56 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("SUGGESTED_ORCHESTRATOR_PHONE");
 
-                    b.Property<Guid?>("SuggestedUserId")
+                    b.Property<Guid>("SuggestedUserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SUGGESTED_USER_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ScsId");
+
+                    b.HasIndex("SuggestedUserId");
+
                     b.ToTable("SM_SCS_SUGGESTION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectUser", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("ScsId")
+                    b.Property<Guid>("ScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_ID");
 
-                    b.Property<Guid?>("ScsUserRoleId")
+                    b.Property<Guid>("ScsUserRoleId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_USER_ROLE_ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ScsId");
+
+                    b.HasIndex("ScsUserRoleId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("SM_SCS_USER");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectUserRole", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -314,24 +344,26 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.Discussion", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("DiscussionTypeId")
+                    b.Property<Guid>("DiscussionTypeId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("DISCUSSION_TYPE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiscussionTypeId");
+
                     b.ToTable("SM_DISCUSSION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.DiscussionEntry", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -341,12 +373,12 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("CREATED_DATE");
 
-                    b.Property<Guid?>("CreatedUserId")
+                    b.Property<Guid>("CreatedUserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("CREATED_USER_ID");
 
-                    b.Property<Guid?>("DiscussionId")
+                    b.Property<Guid>("DiscussionId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("DISCUSSION_ID");
@@ -363,12 +395,16 @@ namespace ScienceMap.WebServices.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedUserId");
+
+                    b.HasIndex("DiscussionId");
+
                     b.ToTable("SM_DISCUSSION_ENTRY");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.DiscussionType", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -386,7 +422,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.Organisation", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -397,12 +433,12 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("NAME");
 
-                    b.Property<Guid?>("OrganisationStateId")
+                    b.Property<Guid>("OrganisationStateId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ORGANISATION_STATE_ID");
 
-                    b.Property<Guid?>("OrganisationTypeId")
+                    b.Property<Guid>("OrganisationTypeId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ORGANISATION_TYPE_ID");
@@ -419,12 +455,16 @@ namespace ScienceMap.WebServices.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrganisationStateId");
+
+                    b.HasIndex("OrganisationTypeId");
+
                     b.ToTable("SM_ORGANISATION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.OrganisationState", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -442,7 +482,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.OrganisationType", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -460,12 +500,12 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluence", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("CreatedUserId")
+                    b.Property<Guid>("CreatedUserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("CREATED_USER_ID");
@@ -475,29 +515,37 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasColumnName("NOTE");
 
-                    b.Property<Guid?>("PubIdSource")
+                    b.Property<Guid>("PubIdSource")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_ID_SOURCE");
 
-                    b.Property<Guid?>("PubIdTarget")
+                    b.Property<Guid>("PubIdTarget")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_ID_TARGET");
 
-                    b.Property<Guid?>("PubInfluenceTypeId")
+                    b.Property<Guid>("PubInfluenceTypeId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_INFLUENCE_TYPE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedUserId");
+
+                    b.HasIndex("PubIdSource");
+
+                    b.HasIndex("PubIdTarget");
+
+                    b.HasIndex("PubInfluenceTypeId");
+
                     b.ToTable("SM_PUB_INFLUENCE");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceRate", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -506,34 +554,39 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("CREATED_DATE");
 
-                    b.Property<Guid?>("DiscussionId")
-                        .IsRequired()
+                    b.Property<Guid>("DiscussionId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("DISCUSSION_ID");
 
-                    b.Property<Guid?>("OriginatorUserId")
-                        .IsRequired()
+                    b.Property<Guid>("OriginatorUserId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ORIGINATOR_USER_ID");
 
-                    b.Property<Guid?>("PubInfluenceId")
+                    b.Property<Guid>("PubInfluenceId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_INFLUENCE_ID");
 
-                    b.Property<Guid?>("PubInfluenceRateTypeId")
-                        .IsRequired()
+                    b.Property<Guid>("PubInfluenceRateTypeId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_INFLUENCE_RATE_TYPE_ID");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DiscussionId");
+
+                    b.HasIndex("OriginatorUserId");
+
+                    b.HasIndex("PubInfluenceId");
+
+                    b.HasIndex("PubInfluenceRateTypeId");
 
                     b.ToTable("SM_PUB_INFLUENCE_RATE");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceRateType", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -551,7 +604,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceType", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -567,24 +620,28 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("NAME");
 
-                    b.Property<Guid?>("PubInfluenceTypeAssementId")
+                    b.Property<Guid>("PubInfluenceTypeAssementId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_INFLUENCE_TYPE_ASSEMENT_ID");
 
-                    b.Property<Guid?>("PubInfluenceTypeStateId")
+                    b.Property<Guid>("PubInfluenceTypeStateId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_INFLUENCE_TYPE_STATE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PubInfluenceTypeAssementId");
+
+                    b.HasIndex("PubInfluenceTypeStateId");
+
                     b.ToTable("SM_PUB_INFLUENCE_TYPE");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceTypeAssessment", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -602,7 +659,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceTypeState", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -620,29 +677,33 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceTypeSuggestion", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("PubInfluenceTypeId")
+                    b.Property<Guid>("PubInfluenceTypeId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUB_INFLUENCE_TYPE_ID");
 
-                    b.Property<Guid?>("SuggestedUserId")
+                    b.Property<Guid>("SuggestedUserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SUGGESTED_USER_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PubInfluenceTypeId");
+
+                    b.HasIndex("SuggestedUserId");
+
                     b.ToTable("SM_PUB_INFLUENCE_TYPE_SUGGESTION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.Publication", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -657,7 +718,7 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(360)")
                         .HasColumnName("ADDITIONAL_DETAILS");
 
-                    b.Property<Guid?>("PublicationStateId")
+                    b.Property<Guid>("PublicationStateId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUBLICATION_STATE_ID");
@@ -675,17 +736,19 @@ namespace ScienceMap.WebServices.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PublicationStateId");
+
                     b.ToTable("SM_PUBLICATION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PublicationAuthor", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("AuthorNameId")
+                    b.Property<Guid>("AuthorNameId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("AUTHOR_NAME_ID");
@@ -694,19 +757,23 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ORDER_KEY");
 
-                    b.Property<Guid?>("PublicationId")
+                    b.Property<Guid>("PublicationId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUBLICATION_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorNameId");
+
+                    b.HasIndex("PublicationId");
+
                     b.ToTable("SM_PUBLICATION_AUTHOR");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PublicationState", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -724,7 +791,7 @@ namespace ScienceMap.WebServices.Data.Migrations
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.User", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -752,107 +819,125 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("USER_NAME");
 
-                    b.Property<Guid?>("UserStateId")
+                    b.Property<Guid>("UserStateId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_STATE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserStateId");
+
                     b.ToTable("SM_USER");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserAuthor", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("PublicationAuthorId")
+                    b.Property<Guid>("PublicationAuthorId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("PUBLICATION_AUTHOR_ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PublicationAuthorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("SM_USER_AUTHOR");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserFavAuthor", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("FavUserAuthorId")
+                    b.Property<Guid>("FavUserAuthorId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("FAV_USER_AUTHOR_ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FavUserAuthorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("SM_USER_FAV_AUTHOR");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserFavClassificationSubject", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("ScsId")
+                    b.Property<Guid>("ScsId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SCS_ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ScsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("SM_USER_FAV_SCS");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserFollowerDiscussion", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("DiscussionId")
+                    b.Property<Guid>("DiscussionId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("DISCUSSION_ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiscussionId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("SM_USER_FOLLOWER_DISCUSSION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserOrganisation", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -861,57 +946,65 @@ namespace ScienceMap.WebServices.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ORDER_KEY");
 
-                    b.Property<Guid?>("OrganisationId")
+                    b.Property<Guid>("OrganisationId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ORGANISATION_ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganisationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("SM_USER_ORGANISATION");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserRole", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ID");
 
-                    b.Property<Guid?>("UserRoleTypeId")
+                    b.Property<Guid>("UserRoleTypeId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("USER_ROLE_TYPE_ID");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserRoleTypeId");
+
                     b.ToTable("SM_USER_ROLE");
                 });
 
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserRoleType", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<Guid?>("Description")
+                    b.Property<Guid>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("DESCRIPTION");
 
-                    b.Property<Guid?>("Name")
+                    b.Property<Guid>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("uniqueidentifier")
@@ -922,9 +1015,35 @@ namespace ScienceMap.WebServices.Data.Migrations
                     b.ToTable("SM_USER_ROLE_TYPE");
                 });
 
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserScsMapping", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ID");
+
+                    b.Property<Guid>("ScsId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SCS_ID");
+
+                    b.Property<Guid>("UserId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("USER_ID");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SM_USER_SCS");
+                });
+
             modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserState", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
@@ -938,6 +1057,475 @@ namespace ScienceMap.WebServices.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SM_USER_STATE");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubject", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubjectState", "ClassificationSubjectState")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubjectState");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectDiscussion", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Discussion", "Discussion")
+                        .WithMany()
+                        .HasForeignKey("DiscussionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("InitiatedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("Discussion");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectPublication", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("OriginatorUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Publication", "Publication")
+                        .WithMany()
+                        .HasForeignKey("PublicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubjectPublicationState", "ClassificationSubjectPublicationState")
+                        .WithMany()
+                        .HasForeignKey("ScsPublicationStateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("ClassificationSubjectPublicationState");
+
+                    b.Navigation("Publication");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectRelation", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ParentClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ParentScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("ParentClassificationSubject");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectSuggestion", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("SuggestedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.ClassificationSubjectUser", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubjectUserRole", "ClassificationSubjectUserRole")
+                        .WithMany()
+                        .HasForeignKey("ScsUserRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("ClassificationSubjectUserRole");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.Discussion", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.DiscussionType", "DiscussionType")
+                        .WithMany()
+                        .HasForeignKey("DiscussionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DiscussionType");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.DiscussionEntry", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Discussion", "Discussion")
+                        .WithMany()
+                        .HasForeignKey("DiscussionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Discussion");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.Organisation", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.OrganisationState", "OrganisationState")
+                        .WithMany()
+                        .HasForeignKey("OrganisationStateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.OrganisationType", "OrganisationType")
+                        .WithMany()
+                        .HasForeignKey("OrganisationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrganisationState");
+
+                    b.Navigation("OrganisationType");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluence", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Publication", "PublicationSource")
+                        .WithMany()
+                        .HasForeignKey("PubIdSource")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Publication", "PublicationTarget")
+                        .WithMany()
+                        .HasForeignKey("PubIdTarget")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PubInfluenceType", "PubInfluenceType")
+                        .WithMany()
+                        .HasForeignKey("PubInfluenceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PubInfluenceType");
+
+                    b.Navigation("PublicationSource");
+
+                    b.Navigation("PublicationTarget");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceRate", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Discussion", "Discussion")
+                        .WithMany()
+                        .HasForeignKey("DiscussionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("OriginatorUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PubInfluence", "PubInfluence")
+                        .WithMany()
+                        .HasForeignKey("PubInfluenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PubInfluenceRateType", "PubInfluenceRateType")
+                        .WithMany()
+                        .HasForeignKey("PubInfluenceRateTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Discussion");
+
+                    b.Navigation("PubInfluence");
+
+                    b.Navigation("PubInfluenceRateType");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceType", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PubInfluenceTypeAssessment", "PubInfluenceTypeAssessment")
+                        .WithMany()
+                        .HasForeignKey("PubInfluenceTypeAssementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PubInfluenceTypeState", "PubInfluenceTypeState")
+                        .WithMany()
+                        .HasForeignKey("PubInfluenceTypeStateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PubInfluenceTypeAssessment");
+
+                    b.Navigation("PubInfluenceTypeState");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PubInfluenceTypeSuggestion", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PubInfluenceType", "PubInfluenceType")
+                        .WithMany()
+                        .HasForeignKey("PubInfluenceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("SuggestedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PubInfluenceType");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.Publication", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PublicationState", "PublicationState")
+                        .WithMany()
+                        .HasForeignKey("PublicationStateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PublicationState");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.PublicationAuthor", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.AuthorName", "AuthorName")
+                        .WithMany()
+                        .HasForeignKey("AuthorNameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Publication", "Publication")
+                        .WithMany()
+                        .HasForeignKey("PublicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuthorName");
+
+                    b.Navigation("Publication");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.User", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.UserState", "UserState")
+                        .WithMany()
+                        .HasForeignKey("UserStateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserState");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserAuthor", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.PublicationAuthor", "PublicationAuthor")
+                        .WithMany()
+                        .HasForeignKey("PublicationAuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PublicationAuthor");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserFavAuthor", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.UserAuthor", "UserAuthor")
+                        .WithMany()
+                        .HasForeignKey("FavUserAuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserAuthor");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserFavClassificationSubject", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserFollowerDiscussion", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Discussion", "Discussion")
+                        .WithMany()
+                        .HasForeignKey("DiscussionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Discussion");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserOrganisation", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.Organisation", "Organisation")
+                        .WithMany()
+                        .HasForeignKey("OrganisationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organisation");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserRole", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.UserRoleType", "UserRoleType")
+                        .WithMany()
+                        .HasForeignKey("UserRoleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserRoleType");
+                });
+
+            modelBuilder.Entity("ScienceMap.WebServices.Data.Models.UserScsMapping", b =>
+                {
+                    b.HasOne("ScienceMap.WebServices.Data.Models.ClassificationSubject", "ClassificationSubject")
+                        .WithMany()
+                        .HasForeignKey("ScsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ScienceMap.WebServices.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassificationSubject");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

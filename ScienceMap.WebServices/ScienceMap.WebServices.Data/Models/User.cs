@@ -9,7 +9,7 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         // TODO - Email Validation
         [Column("USER_NAME")]
@@ -32,8 +32,12 @@ namespace ScienceMap.WebServices.Data.Models
         public string EncryptedPasswordHash { get; set; }
 
         [Column("USER_STATE_ID")]
-        [ForeignKey("SM_USER_STATE")]
+        [ForeignKey("UserState")]
         [Required]
-        public Guid? UserStateId { get; set; }
+        public Guid UserStateId { get; set; }
+
+        #region Back Navigation
+        public virtual UserState UserState { get; set; }
+        #endregion
     }
 }

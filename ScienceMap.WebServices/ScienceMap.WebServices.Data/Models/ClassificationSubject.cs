@@ -9,7 +9,7 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("NAME")]
         [MaxLength(50)]
@@ -29,8 +29,12 @@ namespace ScienceMap.WebServices.Data.Models
         public string Keywords { get; set; }
 
         [Column("STATE_ID")]
-        [ForeignKey("SM_SCS_STATE")]
         [Required]
-        public Guid? StateId { get; set; }
+        [ForeignKey("ClassificationSubjectState")]
+        public Guid StateId { get; set; }
+
+        #region Back Navigation
+        public virtual ClassificationSubjectState ClassificationSubjectState { get; set; }
+        #endregion
     }
 }

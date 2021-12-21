@@ -9,17 +9,17 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("ORGANISATION_TYPE_ID")]
-        [ForeignKey("SM_ORGANISATION_TYPE")]
+        [ForeignKey("OrganisationType")]
         [Required]
-        public Guid? OrganisationTypeId { get; set; }
+        public Guid OrganisationTypeId { get; set; }
 
         [Column("ORGANISATION_STATE_ID")]
-        [ForeignKey("SM_ORGANISATION_STATE")]
+        [ForeignKey("OrganisationState")]
         [Required]
-        public Guid? OrganisationStateId { get; set; }
+        public Guid OrganisationStateId { get; set; }
 
         [Column("NAME")]
         [MaxLength(100)]
@@ -33,5 +33,10 @@ namespace ScienceMap.WebServices.Data.Models
         [Column("URL")]
         [MaxLength(100)]
         public string Url { get; set; }
+
+        #region Back Navigation
+        public virtual OrganisationType OrganisationType { get; set; }
+        public virtual OrganisationState OrganisationState { get; set; }
+        #endregion
     }
 }

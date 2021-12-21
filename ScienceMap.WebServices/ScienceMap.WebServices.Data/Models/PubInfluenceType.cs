@@ -9,7 +9,7 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("NAME")]
         [MaxLength(50)]
@@ -17,18 +17,23 @@ namespace ScienceMap.WebServices.Data.Models
         public string Name { get; set; }
 
         [Column("PUB_INFLUENCE_TYPE_ASSEMENT_ID")]
-        [ForeignKey("SM_PUB_INFLUENCE_TYPE_ASSESSMENT")]
+        [ForeignKey("PubInfluenceTypeAssessment")]
         [Required]
-        public Guid? PubInfluenceTypeAssementId { get; set; }
+        public Guid PubInfluenceTypeAssementId { get; set; }
 
         [Column("PUB_INFLUENCE_TYPE_STATE_ID")]
-        [ForeignKey("SM_PUB_INFLUENCE_TYPE_STATE")]
+        [ForeignKey("PubInfluenceTypeState")]
         [Required]
-        public Guid? PubInfluenceTypeStateId { get; set; }
+        public Guid PubInfluenceTypeStateId { get; set; }
 
         [Column("DESCRIPTION")]
         [MaxLength(250)]
         public string Description { get; set; }
+
+        #region Back Navigation
+        public virtual PubInfluenceTypeAssessment PubInfluenceTypeAssessment { get; set; }
+        public virtual PubInfluenceTypeState PubInfluenceTypeState { get; set; }
+        #endregion
 
     }
 }

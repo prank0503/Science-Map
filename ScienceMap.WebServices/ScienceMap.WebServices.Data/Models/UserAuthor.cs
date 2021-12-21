@@ -9,17 +9,22 @@ namespace ScienceMap.WebServices.Data.Models
     {
         [Key]
         [Column("ID")]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("USER_ID")]
-        [ForeignKey("SM_USER")]
+        [ForeignKey("User")]
         [Required]
-        public Guid? UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Column("PUBLICATION_AUTHOR_ID")]
-        [ForeignKey("SM_PUBLICATION_AUTHOR")]
+        [ForeignKey("PublicationAuthor")]
         [Required]
-        public Guid? PublicationAuthorId { get; set; }
+        public Guid PublicationAuthorId { get; set; }
+
+        #region Back Navigation
+        public virtual User User { get; set; }
+        public virtual PublicationAuthor PublicationAuthor { get; set; }
+        #endregion
 
     }
 }
