@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.Data\ScienceMap.Backend.Data.WebClient\ScienceMap.Backend.Data.WebClient.csproj" />
+    <ProjectReference Include="..\Backend.Data\ScienceMap.Backend.Data\ScienceMap.Backend.Data.csproj" />
+  </ItemGroup>
+
+</Project>
